@@ -6,7 +6,7 @@
 ## Requirements
 
 * [Django][django] 1.11+
-* Modified version of periodiq
+* Slightly modified version of periodiq [https://gitlab.com/sovetnikov/periodiq](https://gitlab.com/sovetnikov/periodiq)
 
 
 ## Installation
