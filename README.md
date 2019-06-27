@@ -1,6 +1,6 @@
 # django_periodiq
 
-**django_periodiq** is a Django app that integrates with [periodiq](https://gitlab.com/bersace/periodiq) .
+**django_periodiq** is a Django app that integrates with [periodiq](https://gitlab.com/bersace/periodiq) a simple scheduler for Dramatiq Task Queue.
 
 
 ## Requirements
