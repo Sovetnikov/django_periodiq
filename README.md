@@ -9,6 +9,7 @@
 * Slightly modified version of periodiq [https://gitlab.com/sovetnikov/periodiq](https://gitlab.com/sovetnikov/periodiq)
 You can install it from repo:
     
+    
     pip install git+https://gitlab.com/sovetnikov/periodiq
 
 ## Installation
