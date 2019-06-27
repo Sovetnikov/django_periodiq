@@ -61,7 +61,7 @@ class Command(BaseCommand):
     def discover_tasks_modules(self):
         ignored_modules = set(getattr(settings, "DRAMATIQ_IGNORED_MODULES", []))
         app_configs = (c for c in apps.get_app_configs() if module_has_submodule(c.module, "tasks"))
-        tasks_modules = ["django_periodiq.setup"]
+        tasks_modules = ["django_periodiq.setup"] # Broker module is first
         for conf in app_configs:
             module = conf.name + ".tasks"
             if module in ignored_modules:
