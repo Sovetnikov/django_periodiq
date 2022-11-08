@@ -66,7 +66,7 @@ class Command(BaseCommand):
         for conf in apps.get_app_configs():
             for task_module in task_module_names:
                 if module_has_submodule(conf.module, task_module):
-                    module = conf.name + task_module
+                    module = f"{conf.name}.{task_module}"
                     if module in ignored_modules:
                         self.stdout.write(" * Ignored tasks module: %r" % module)
                     else:
