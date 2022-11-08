@@ -59,16 +59,19 @@ class Command(BaseCommand):
             os.execvp(executable_path, process_args)
 
     def discover_tasks_modules(self):
+        task_module_names = getattr(settings, "DRAMATIQ_AUTODISCOVER_MODULES", ("tasks",))
         ignored_modules = set(getattr(settings, "DRAMATIQ_IGNORED_MODULES", []))
-        app_configs = (c for c in apps.get_app_configs() if module_has_submodule(c.module, "tasks"))
-        tasks_modules = ["django_periodiq.setup"] # Broker module is first
-        for conf in app_configs:
-            module = conf.name + ".tasks"
-            if module in ignored_modules:
-                self.stdout.write(" * Ignored tasks module: %r" % module)
-            else:
-                self.stdout.write(" * Discovered tasks module: %r" % module)
-                tasks_modules.append(module)
+
+        tasks_modules = ["django_periodiq.setup"]  # Broker module is first
+        for conf in apps.get_app_configs():
+            for task_module in task_module_names:
+                if module_has_submodule(conf.module, task_module):
+                    module = f"{conf.name}.{task_module}"
+                    if module in ignored_modules:
+                        self.stdout.write(" * Ignored tasks module: %r" % module)
+                    else:
+                        self.stdout.write(" * Discovered tasks module: %r" % module)
+                        tasks_modules.append(module)
 
         return tasks_modules
 
